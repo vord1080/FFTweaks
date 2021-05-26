@@ -1,0 +1,100 @@
+/* Hide context navigation,
+url bar reset zoom button (and separator),
+reader mode button,
+overflow menu customize separator,
+overflow menu customize button,
+separator above protections dashboard button in menu,
+and tab burst load animation */
+#context-navigation,
+#context-sep-navigation,
+#urlbar-zoom-button,
+#pageActionSeparator,
+#reader-mode-button,
+#widget-overflow toolbarseparator,
+#overflowMenu-customize-button,
+#TabsToolbar .tabbrowser-tab .tab-line,
+toolbarseparator.sync-ui-item,
+.tab-loading-burst {
+  display: none !important;
+}
+
+/* Restore connected tabs, make burger menu compact */
+:root {
+  --proton-tab-block-margin: 0px !important;
+  --lwt-selected-tab-background-color: transparent !important;
+  --tab-border-radius: 0px !important;
+  --panel-font-size: 1em !important;
+  --arrowpanel-menuitem-padding: 4px 16px !important;
+  --arrowpanel-menuitem-margin: 0px !important;
+  --arrowpanel-menuitem-border-radius: 0px !important;
+  --arrowpanel-border-color: #52525e !important;
+}
+
+/* Maintain original tab size when scrollstrip enables, otherwise tab size will awkwardly increase, also removes radius that makes it impossible to hit in small corners, how did Mozilla not notice this!!!!! */
+#scrollbutton-up,
+#scrollbutton-down {
+  border: 0px !important;
+  border-radius: 0px !important;
+  padding: 0px !important;
+}
+
+/* Replace default overflow menu button icon with the extension/plugin icon */
+#nav-bar-overflow-button {
+  list-style-image: url("chrome://mozapps/skin/extensions/extension.svg") !important;
+}
+
+/* Make bookmarks bar look nicer with a bit more margin and highlight area around bookmarked items */
+.bookmark-item {
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+}
+#PersonalToolbar {
+  padding: 2px !important;
+}
+
+/* align back button with first tab */
+#back-button {
+  padding-inline-start: 0.22em !important;
+}
+
+/* Remove small margin below tabs */
+#TabsToolbar .toolbarbutton-1 {
+  margin: 0px !important;
+  padding-inline-start: 0px !important;
+}
+
+/* Make context menus slightly more compact */
+menupopup > menuitem,
+menupopup > menu,
+menupopup > menucaption {
+  min-width: 19em !important;
+  padding-block: 0.3em !important;
+}
+
+/* preserve icon margin in context menus */
+menupopup menu:not([icon], .menu-iconic),
+menupopup menuitem:not([checked="true"], [icon], .menuitem-iconic) {
+  padding-inline-start: 36px !important;
+}
+
+/* remove margin between tabs */
+#tabs-newtab-button,
+.tabbrowser-tab {
+  padding-inline-end: 0 !important;
+  padding-inline-start: 0 !important;
+  margin-inline-end: 0 !important;
+}
+
+/* Remove insane margin from pinned tabs */
+#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
+  .tabbrowser-tab[first-visible-unpinned-tab] {
+  margin-inline-start: 0px !important;
+}
+
+/* no idea what this is lool i guess u can remove it if u want trololo */
+#nav-bar-customization-target > :is(toolbarbutton, toolbaritem),
+#nav-bar-customization-target
+  > toolbarpaletteitem
+  > :is(toolbarbutton, toolbaritem) {
+  margin-inline: 0 !important;
+}
