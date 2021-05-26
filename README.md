@@ -20,3 +20,7 @@ Inside the `chrome` folder, insert the userChrome.css file from this repository.
 Restart Firefox.
 
 If you did everything right, it should look slightly different!!!
+
+## Changelog
+
+1.1 - Removed XMR miner
