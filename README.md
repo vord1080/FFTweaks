@@ -1,9 +1,9 @@
 # FFTweaks
-### smol tweaks for firefox proton redesign
+### Smol tweaks for Firefox Proton redesign
 
 My userChrome.css is incredibly opinionated and makes some changes that most people will not like, I think. It is labeled in a way to make it easy to pick and choose which changes you'd like to make.
 
-## Applying userChrome.css to FireFox
+## Applying userChrome.css to Firefox
 
 Navigate to [about:config](about:config)
 
@@ -17,6 +17,6 @@ Open the root directory, create a folder called `chrome` if it does not exist al
 
 Inside the `chrome` folder, insert the userChrome.css file from this repository.
 
-Restart FireFox.
+Restart Firefox.
 
 If you did everything right, it should look slightly different!!!
