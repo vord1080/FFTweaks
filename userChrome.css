@@ -53,8 +53,8 @@ toolbarseparator.sync-ui-item,
 }
 
 /* align back button with first tab */
-#back-button {
-  padding-inline-start: 0.22em !important;
+#nav-bar-customization-target > :first-child {
+  padding-inline-start: 0.21em !important;
 }
 
 /* Remove small margin below tabs */
