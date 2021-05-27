@@ -18,7 +18,7 @@ toolbarseparator.sync-ui-item,
   display: none !important;
 }
 
-/* Restore connected tabs, make burger menu compact */
+/* Restore connected tabs, make burger menu compact, align back button with tab, etc */
 :root {
   --proton-tab-block-margin: 0px !important;
   --lwt-selected-tab-background-color: transparent !important;
@@ -28,6 +28,7 @@ toolbarseparator.sync-ui-item,
   --arrowpanel-menuitem-margin: 0px !important;
   --arrowpanel-menuitem-border-radius: 0px !important;
   --arrowpanel-border-color: #52525e !important;
+  --toolbar-start-end-padding: 0.21em !important;
 }
 
 /* Maintain original tab size when scrollstrip enables, otherwise tab size will awkwardly increase */
@@ -50,11 +51,6 @@ toolbarseparator.sync-ui-item,
 }
 #PersonalToolbar {
   padding: 2px !important;
-}
-
-/* align back button with first tab */
-#nav-bar-customization-target > :first-child {
-  padding-inline-start: 0.21em !important;
 }
 
 /* Remove small margin below tabs */
