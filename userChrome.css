@@ -30,7 +30,7 @@ toolbarseparator.sync-ui-item,
   --arrowpanel-border-color: #52525e !important;
 }
 
-/* Maintain original tab size when scrollstrip enables, otherwise tab size will awkwardly increase, also removes radius that makes it impossible to hit in small corners, how did Mozilla not notice this!!!!! */
+/* Maintain original tab size when scrollstrip enables, otherwise tab size will awkwardly increase */
 #scrollbutton-up,
 #scrollbutton-down {
   border: 0px !important;
@@ -67,14 +67,15 @@ toolbarseparator.sync-ui-item,
 menupopup > menuitem,
 menupopup > menu,
 menupopup > menucaption {
-  min-width: 19em !important;
   padding-block: 0.3em !important;
 }
 
 /* preserve icon margin in context menus */
-menupopup menu:not([icon], .menu-iconic),
-menupopup menuitem:not([checked="true"], [icon], .menuitem-iconic) {
+menupopup:not(.in-menulist) menu:not([icon], .menu-iconic),
+menupopup:not(.in-menulist)
+  menuitem:not([checked="true"], [icon], .menuitem-iconic) {
   padding-inline-start: 36px !important;
+  min-width: 19em !important;
 }
 
 /* remove margin between tabs */
@@ -91,7 +92,7 @@ menupopup menuitem:not([checked="true"], [icon], .menuitem-iconic) {
   margin-inline-start: 0px !important;
 }
 
-/* no idea what this is lool i guess u can remove it if u want trololo */
+/* no idea what this is lool */
 #nav-bar-customization-target > :is(toolbarbutton, toolbaritem),
 #nav-bar-customization-target
   > toolbarpaletteitem
