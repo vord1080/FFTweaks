@@ -1,34 +1,56 @@
 /* Hide context navigation,
-url bar reset zoom button (and separator),
-reader mode button,
+context navigation separator,
 overflow menu customize separator,
 overflow menu customize button,
-separator above protections dashboard button in menu,
+tab PLAYING and MUTE indicators,
 and tab burst load animation */
 #context-navigation,
 #context-sep-navigation,
-#urlbar-zoom-button,
-#pageActionSeparator,
-#reader-mode-button,
 #widget-overflow toolbarseparator,
 #overflowMenu-customize-button,
-#TabsToolbar .tabbrowser-tab .tab-line,
-toolbarseparator.sync-ui-item,
+hbox .tab-secondary-label,
 .tab-loading-burst {
   display: none !important;
 }
 
-/* Restore connected tabs, make burger menu compact, align back button with tab, etc */
+/* Restore connected tabs, make burger menu compact, align back button with tab, make UI compact in general, etc */
 :root {
+  --tab-block-margin: 0px !important;
   --proton-tab-block-margin: 0px !important;
   --lwt-selected-tab-background-color: transparent !important;
   --tab-border-radius: 0px !important;
   --panel-font-size: 1em !important;
   --arrowpanel-menuitem-padding: 4px 16px !important;
-  --arrowpanel-menuitem-margin: 0px !important;
+  --arrowpanel-menuitem-margin: 1px !important;
   --arrowpanel-menuitem-border-radius: 0px !important;
-  --arrowpanel-border-color: #52525e !important;
   --toolbar-start-end-padding: 0.21em !important;
+  --tab-min-height: 29px !important;
+  --toolbarbutton-outer-padding: 3px !important;
+  --toolbarbutton-inner-padding: 6px !important;
+  --bookmark-block-padding: 1px !important;
+  --urlbar-min-height: 26px !important;
+  --urlbar-icon-padding: 3px !important;
+}
+
+/* remove margin between tabs */
+.tabbrowser-tab {
+  padding-inline-start: 0 !important;
+  padding-inline-end: 0 !important;
+}
+
+/* Remove margin between buttons */
+#TabsToolbar .toolbarbutton-1 {
+  margin: 0 !important;
+  padding-inline: 0 !important;
+}
+
+/* Remove margin from pinned tabs */
+#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
+  .tabbrowser-tab[first-visible-unpinned-tab],
+#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
+  > #tabbrowser-arrowscrollbox
+  > .tabbrowser-tab[first-visible-unpinned-tab] {
+  margin-inline-start: 0px !important;
 }
 
 /* Maintain original tab size when scrollstrip enables, otherwise tab size will awkwardly increase */
@@ -39,6 +61,11 @@ toolbarseparator.sync-ui-item,
   padding: 0px !important;
 }
 
+/* I remembered why I hid the zoom indicator in the first place, that horrible animation!!!!! grrr!!!!! */
+#urlbar-zoom-button[animate="true"] {
+  animation-name: none !important;
+}
+
 /* Replace default overflow menu button icon with the extension/plugin icon */
 #nav-bar-overflow-button {
   list-style-image: url("chrome://mozapps/skin/extensions/extension.svg") !important;
@@ -46,17 +73,11 @@ toolbarseparator.sync-ui-item,
 
 /* Make bookmarks bar look nicer with a bit more margin and highlight area around bookmarked items */
 .bookmark-item {
-  padding-top: 3px !important;
-  padding-bottom: 3px !important;
+  padding: 3px !important;
 }
 #PersonalToolbar {
   padding: 2px !important;
-}
-
-/* Remove small margin below tabs */
-#TabsToolbar .toolbarbutton-1 {
-  margin: 0px !important;
-  padding-inline-start: 0px !important;
+  padding-inline: 1px !important;
 }
 
 /* Make context menus slightly more compact */
@@ -74,24 +95,52 @@ menupopup:not(.in-menulist)
   min-width: 19em !important;
 }
 
-/* remove margin between tabs */
-#tabs-newtab-button,
-.tabbrowser-tab {
-  padding-inline-end: 0 !important;
-  padding-inline-start: 0 !important;
-  margin-inline-end: 0 !important;
+/* Makes the speaker icon to always appear if the tab is playing (not only on hover) BEGIN */
+#tabbrowser-tabs[secondarytext-unsupported]
+  .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked])
+  > :not(.tab-icon-overlay),
+#toolbar-menubar:not(:hover)
+  + #TabsToolbar:not(:hover)
+  #tabbrowser-tabs:not([secondarytext-unsupported])
+  .tab-icon-image[src]
+  ~ .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]),
+:is(#toolbar-menubar:hover + #TabsToolbar, #TabsToolbar:hover)
+  .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked])
+  > :not(.tab-icon-overlay) {
+  opacity: 1 !important;
 }
 
-/* Remove insane margin from pinned tabs */
-#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
-  .tabbrowser-tab[first-visible-unpinned-tab] {
-  margin-inline-start: 0px !important;
+.tab-icon-overlay:not([crashed]) {
+  top: -4.5px !important;
+  inset-inline-end: -9px !important;
+  z-index: 1 !important;
+  background: transparent !important;
+  width: 16px !important;
+  height: 16px !important;
 }
 
-/* no idea what this is lool */
-#nav-bar-customization-target > :is(toolbarbutton, toolbaritem),
-#nav-bar-customization-target
-  > toolbarpaletteitem
-  > :is(toolbarbutton, toolbaritem) {
-  margin-inline: 0 !important;
+.tab-icon-overlay:not([crashed])[soundplaying]:hover,
+.tab-icon-overlay:not([crashed])[muted]:hover,
+.tab-icon-overlay:not([crashed])[activemedia-blocked]:hover {
+  color: var(--toolbar-bgcolor, white) !important;
+  stroke: var(--lwt-tab-text, var(--toolbar-color)) !important;
+  background-color: var(--lwt-tab-text, var(--toolbar-color)) !important;
+  fill-opacity: 0.95 !important;
 }
+
+#TabsToolbar[brighttext] .tab-icon-overlay:not([crashed])[soundplaying]:hover,
+#TabsToolbar[brighttext] .tab-icon-overlay:not([crashed])[muted]:hover,
+#TabsToolbar[brighttext]
+  .tab-icon-overlay:not([crashed])[activemedia-blocked]:hover {
+  color: var(--toolbar-bgcolor, black) !important;
+}
+
+.tabbrowser-tab:not([image])
+  .tab-icon-overlay:not([pinned], [sharing], [crashed]):hover {
+  padding: 0 !important;
+}
+
+.tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) {
+  opacity: 1 !important;
+}
+/* Makes the speaker icon to always appear if the tab is playing (not only on hover) END */
