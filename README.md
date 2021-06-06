@@ -8,6 +8,7 @@ My userChrome.css is incredibly opinionated and makes some changes that most peo
 Navigate to [about:config](about:config)
 
 Set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`
+
 Set `browser.uidensity` to `0`
 
 Navigate to [about:profiles](about:profiles)
