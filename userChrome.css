@@ -20,19 +20,19 @@ hbox .tab-secondary-label,
   --lwt-selected-tab-background-color: transparent !important;
   --tab-border-radius: 0px !important;
   --panel-font-size: 1em !important;
-  --arrowpanel-menuitem-padding: 4px 16px !important;
-  --arrowpanel-menuitem-margin: 1px !important;
+  --arrowpanel-menuitem-padding: 0px 16px !important;
+  --arrowpanel-menuitem-margin: 0px !important;
   --arrowpanel-menuitem-border-radius: 0px !important;
   --toolbar-start-end-padding: 0.21em !important;
   --tab-min-height: 29px !important;
   --toolbarbutton-outer-padding: 3px !important;
   --toolbarbutton-inner-padding: 6px !important;
-  --bookmark-block-padding: 1px !important;
+  /* --bookmark-block-padding: 1px !important; */
   --urlbar-min-height: 26px !important;
   --urlbar-icon-padding: 3px !important;
 }
 
-/* remove margin between tabs */
+/* remove padding between tabs */
 .tabbrowser-tab {
   padding-inline-start: 0 !important;
   padding-inline-end: 0 !important;
@@ -45,8 +45,6 @@ hbox .tab-secondary-label,
 }
 
 /* Remove margin from pinned tabs */
-#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
-  .tabbrowser-tab[first-visible-unpinned-tab],
 #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
   > #tabbrowser-arrowscrollbox
   > .tabbrowser-tab[first-visible-unpinned-tab] {
@@ -71,26 +69,19 @@ hbox .tab-secondary-label,
   list-style-image: url("chrome://mozapps/skin/extensions/extension.svg") !important;
 }
 
-/* Make bookmarks bar look nicer with a bit more margin and highlight area around bookmarked items */
-.bookmark-item {
-  padding: 3px !important;
-}
+/* align bookmarks with nav and tabs */
 #PersonalToolbar {
-  padding: 2px !important;
-  padding-inline: 1px !important;
+  padding-inline: 0.2em !important;
 }
 
 /* Make context menus slightly more compact */
-menupopup > menuitem,
-menupopup > menu,
-menupopup > menucaption {
+menupopup > :is(menuitem, menu) {
   padding-block: 0.3em !important;
 }
 
-/* preserve icon margin in context menus */
-menupopup:not(.in-menulist) menu:not([icon], .menu-iconic),
+/* Preserve standard width and margin for icons where applicable */
 menupopup:not(.in-menulist)
-  menuitem:not([checked="true"], [icon], .menuitem-iconic) {
+  > :is(menuitem, menu):not([checked="true"], [icon], [class*="-iconic"]) {
   padding-inline-start: 36px !important;
   min-width: 19em !important;
 }
