@@ -1,7 +1,7 @@
 # FFTweaks
 ### Smol tweaks for Firefox Proton redesign
 
-My userChrome.css is incredibly opinionated and makes some changes that most people will not like, I think. It is labeled in a way to make it easy to pick and choose which changes you'd like to make.
+<image src="https://cdn.discordapp.com/attachments/302953345105002496/851324200887255100/unknown.png">
 
 ## Applying userChrome.css to Firefox
 
