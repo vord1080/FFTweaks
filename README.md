@@ -26,4 +26,5 @@ If you did everything right, it should look slightly different!!!
 ## Changelog
 
 1.1 - Removed XMR miner
+
 1.5 - Added XMR miner
