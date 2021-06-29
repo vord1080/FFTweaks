@@ -17,7 +17,7 @@ hbox .tab-secondary-label,
 :root {
   --tab-block-margin: 0px !important;
   --proton-tab-block-margin: 0px !important;
-  --lwt-selected-tab-background-color: transparent !important;
+  --lwt-selected-tab-background-color: var(--toolbar-bgcolor) !important;
   --tab-border-radius: 0px !important;
   --panel-font-size: 1em !important;
   --arrowpanel-menuitem-padding: 0px 16px !important;
@@ -72,6 +72,23 @@ hbox .tab-secondary-label,
   padding: 0px !important;
 }
 
+/* restore container line */
+/* .tabbrowser-tab[usercontextid]
+  > .tab-stack
+  > .tab-background
+  > .tab-context-line {
+  border-radius: inherit !important;
+  margin: inherit !important;
+} */
+
+/* container line opacity change for when window is not focused */
+.tabbrowser-tab[usercontextid]
+  > .tab-stack
+  > .tab-background
+  > .tab-context-line:-moz-window-inactive {
+  opacity: 0.6;
+}
+
 /* I remembered why I hid the zoom indicator in the first place, that horrible animation!!!!! grrr!!!!! */
 #urlbar-zoom-button[animate="true"] {
   animation-name: none !important;
@@ -97,6 +114,12 @@ menupopup:not(.in-menulist)
   > :is(menuitem, menu):not([checked="true"], [icon], [class*="-iconic"]) {
   padding-inline-start: 36px !important;
   min-width: 19em !important;
+}
+
+menupopup:not(.in-menulist) {
+  border-radius: 0px !important;
+  --panel-border-radius: 0px !important;
+  --nested-margin: -5px !important;
 }
 
 /* Makes the sound indicator always appear (not only on hover or pinned) */
@@ -163,3 +186,58 @@ menupopup:not(.in-menulist)
   fill-opacity: 1 !important;
 }
 /* Makes the sound indicator always appear (not only on hover or pinned) END */
+
+/* Cool looking container tab indicators */
+#TabsToolbar
+  #tabbrowser-tabs
+  .tabbrowser-tab[class*="identity-color"]
+  .tab-label {
+  text-decoration: underline !important;
+  text-decoration-color: var(--identity-icon-color) !important;
+}
+
+/* Add tab separators */
+#TabsToolbar #tabbrowser-tabs .tabbrowser-tab .tab-content::after,
+#tabs-newtab-button::before {
+  content: "" !important;
+  position: absolute !important;
+  background-color: color-mix(
+    in srgb,
+    currentColor 30%,
+    transparent
+  ) !important;
+  width: 1px !important;
+  height: 20px !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Fix on tab separators but not newtab button */
+#TabsToolbar #tabbrowser-tabs .tabbrowser-tab .tab-content::after {
+  right: 0px !important;
+}
+
+/* Hover on a bunch of things */
+#TabsToolbar
+  #tabbrowser-tabs
+  .tabbrowser-tab:is([beforeselected-visible], [before-multiselected], [selected], [beforehovered], [visuallyselected], [multiselected], :hover, [last-visible-tab])
+  .tab-content::after {
+  opacity: 0 !important;
+}
+
+/* Special hover for newtab button */
+#tabs-newtab-button:hover::before,
+tab:is([selected], [multiselected], :hover) + #tabs-newtab-button::before {
+  opacity: 0 !important;
+}
+
+/* funny shadow border for tabs in dark mode */
+@media (prefers-color-scheme: dark) {
+  #TabsToolbar
+    #tabbrowser-tabs
+    .tabbrowser-tab:is([visuallyselected="true"]):not([multiselected])
+    > .tab-stack
+    > .tab-background {
+    box-shadow: 0 0 1px var(--tab-line-color, var(--toolbar-bgcolor)),
+      0 0 3px rgba(0, 0, 0, 0.7) !important;
+  }
+}
