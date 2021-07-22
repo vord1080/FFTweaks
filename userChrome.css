@@ -37,7 +37,7 @@ hbox .tab-secondary-label,
 .tabbrowser-tab {
   padding-inline-start: 0 !important;
   padding-inline-end: 0 !important;
-  z-index: 0 !important;
+  z-index: 1 !important;
 }
 
 /* Remove margin between buttons */
@@ -221,7 +221,7 @@ menupopup:not(.in-menulist) {
   width: 1px !important;
   height: 20px !important;
   transform: translateY(-50%) !important;
-  z-index: 0 !important;
+  z-index: 2147483647 !important;
 }
 
 /* Fix on tab separators but not newtab button */
