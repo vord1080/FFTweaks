@@ -28,8 +28,7 @@ hbox .tab-secondary-label,
   --toolbarbutton-inner-padding: 6px !important;
   --urlbar-min-height: 26px !important;
   --urlbar-icon-padding: 3px !important;
-  --tab-separator-color: color-mix(in srgb, currentColor 30%, transparent);
-  --max-z-index: 1;
+  --tab-separator-color: #5f5f64 !important;
 }
 
 /* remove padding between tabs and also z-index uhhhhhhh forgot what thats for */
@@ -49,11 +48,6 @@ hbox .tab-secondary-label,
 #TabsToolbar .toolbarbutton-1 {
   margin: 0 !important;
   padding-inline: 0 !important;
-}
-
-/* bad and dumb */
-.tabbrowser-tab:is([selected], [multiselected]) {
-  z-index: var(--max-z-index) !important;
 }
 
 /* quick fix for tab hover bug */
@@ -137,32 +131,52 @@ tab + toolbarbutton > .toolbarbutton-icon {
 }
 
 /* Add tab separators */
-#TabsToolbar #tabbrowser-tabs .tabbrowser-tab .tab-background {
-  /*   box-shadow: -1px 0px 0px -1px var(--tab-separator-color),
-    1px 0px 0px 0px var(--tab-separator-color) !important; */
-  box-shadow: 0 0px 0px 0px white, 0 0px 0px 0px white,
-    5px 0 0px -4px var(--tab-separator-color),
-    -4px 0 0px -4px var(--tab-separator-color);
+#TabsToolbar #tabbrowser-tabs .tabbrowser-tab .tab-content::after,
+#TabsToolbar #tabbrowser-tabs .tabbrowser-tab .tab-content::before {
+  content: "" !important;
+  position: absolute !important;
+  background-color: var(--tab-separator-color) !important;
+  width: 1px !important;
+  height: 20px !important;
+  transform: translateY(-50%) !important;
+  transition: height 90ms ease-out !important;
 }
 
-/* Add separator to newtab button. */
-#tabs-newtab-button {
-  box-shadow: 0 0px 0px 0px white, 0 0px 0px 0px white,
-    0px 0 0px 0px var(--tab-separator-color),
-    -5px 0 0px -4px var(--tab-separator-color);
+/* expand tab separators on hover */
+#TabsToolbar #tabbrowser-tabs .tabbrowser-tab:hover .tab-content::after,
+#TabsToolbar #tabbrowser-tabs .tabbrowser-tab:hover .tab-content::before {
+  height: 30px !important;
 }
 
-/* hide separators and yeah. yeah */
-#tabs-newtab-button:hover,
-#tabbrowser-tabs
-  > #tabbrowser-arrowscrollbox
-  > .tabbrowser-tab:is([beforeselected-visible], [before-multiselected], [selected], [beforehovered], [visuallyselected], [multiselected], :hover, [collapsed], [last-visible-tab])
-  .tab-background,
-#tabbrowser-tabs
-  > #tabbrowser-arrowscrollbox
-  > .tabbrowser-tab:is([beforeselected-visible], [before-multiselected], [selected], [beforehovered], [visuallyselected], [multiselected], :hover, [collapsed], [last-pinned-tab])
-  + #tabs-newtab-button {
+/* uh uh uh uh basically, murder all box-shadows on tab-background bc they get used by some custom themes but it looks weird bc theres no tab padding so Basically its gotta go! */
+.tab-background {
   box-shadow: none !important;
+}
+
+/* basically, cover the separators of the selected tab by making them blend in with the color of tab, funny. */
+#TabsToolbar
+  #tabbrowser-tabs
+  .tabbrowser-tab:is([selected], [multiselected])
+  .tab-content::after,
+#TabsToolbar
+  #tabbrowser-tabs
+  .tabbrowser-tab:is([selected], [multiselected])
+  .tab-content::before {
+  background-color: var(--lwt-selected-tab-background-color) !important;
+  height: 30px !important;
+}
+
+#TabsToolbar #tabbrowser-tabs .tabbrowser-tab .tab-content::after {
+  right: -0px !important;
+}
+
+#TabsToolbar #tabbrowser-tabs .tabbrowser-tab .tab-content::before {
+  left: -1px !important;
+}
+
+/* this is a dumb fix for the newtab button shifting back and forth slightly every time you click it */
+#tabs-newtab-button {
+  transform: translateX(-1px) !important;
 }
 
 @media (-moz-windows-non-native-menus) {
