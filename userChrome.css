@@ -28,13 +28,16 @@ hbox .tab-secondary-label,
   --toolbarbutton-inner-padding: 6px !important;
   --urlbar-min-height: 26px !important;
   --urlbar-icon-padding: 3px !important;
-  --tab-separator-color: #5f5f64 !important;
+  --tab-separator-color: color-mix(
+    in srgb,
+    currentColor 30%,
+    var(--lwt-accent-color)
+  ) !important;
 }
 
 /* remove padding between tabs and also z-index uhhhhhhh forgot what thats for */
 .tabbrowser-tab {
-  padding-inline-start: 0 !important;
-  padding-inline-end: 0 !important;
+  padding-inline: 0px !important;
 }
 
 /* Remove margin from pinned tabs */
@@ -143,6 +146,7 @@ tab + toolbarbutton > .toolbarbutton-icon {
 }
 
 /* expand tab separators on hover */
+#tabs-newtab-button:hover::before,
 #TabsToolbar #tabbrowser-tabs .tabbrowser-tab:hover .tab-content::after,
 #TabsToolbar #tabbrowser-tabs .tabbrowser-tab:hover .tab-content::before {
   height: 30px !important;
@@ -174,9 +178,14 @@ tab + toolbarbutton > .toolbarbutton-icon {
   left: -1px !important;
 }
 
-/* this is a dumb fix for the newtab button shifting back and forth slightly every time you click it */
-#tabs-newtab-button {
-  transform: translateX(-1px) !important;
+#tabs-newtab-button::before {
+  content: "" !important;
+  position: absolute !important;
+  background-color: var(--tab-separator-color) !important;
+  width: 1px !important;
+  height: 20px !important;
+  transform: translateY(-50%) translateX(-1px) !important;
+  transition: height 90ms ease-out !important;
 }
 
 @media (-moz-windows-non-native-menus) {
